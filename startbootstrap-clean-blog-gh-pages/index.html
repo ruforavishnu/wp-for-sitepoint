@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Article For Sitepoint</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('img/home-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Article For Sitepoint</h1>
+                        <hr class="small">
+                        <span class="subheading">Wordpress Plugin Development Tutorial - Learn How To Create A Bulk Category Creator Plugin</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-preview">
+                    
+                        <h2 class="post-title">
+                Wordpress Plugin Development Tutorial - Learn How To Create A Bulk Category Creator Plugin
+                        </h2>
+<p>                      
+                      In this tutorial we are going to take a look into how to create a basic Wordpress Plugin. Our plugin will have an admin page with a basic form element and a submit button and will perform a simple task of creating bulk categories in one go.
+</p>
+<p>
+A lot of times, when we are developing a website or blog on wordpress, we would need to create a lot of categories. Sometimes, it becomes a pain to create categories one by one. So, here we are going to build a plugin which allows a list of comma separated categories to be copy pasted in a textarea. And on clicking a button, all the categories are loaded into the wordpress categories section in a single go. So, you do not need to sit and click on the Add New Category button for every category that has to be created.
+</p>
+
+<h4>Requirements :</h4><br>
+1. You will need a localhost server with Wordpress installed<br>
+2. You will need to know basic HTML and PHP<br>
+
+What are you going to build(Preview of the final stage of what you are going to create)
+<br>
+Preview:
+<br>
+  
+<img class="img-boxed" src="pics/1.png">
+
+
+<br>
+
+
+<h4>What is the Target Audience: </h4>
+<ul>
+<li>Frontend & Backend Developers</li>
+<li>Anybody who is comfortable with HTML5 and PHP</li>
+<li>Wordpress Theme & Plugin Developers</li>
+<li>People wanting to learn Wordpress Plugin development</li>
+</ul>
+
+
+<h4>
+
+A brief description of Wordpress Plugins
+</h4>
+
+<p>
+Plugins in wordpress are basically php scripts which allow you to change or add new features to your existing wordpress installation. It could be something really simple like the Hello Dolly plugin or something really advanced like the Jetpack or Google Analytics plugin.
+</p>
+<p>So, why should you build a plugin?</p><p>
+If there is one thing that a wordpress developer should not do, it is to not hack the wordpress core source files. Then, how else would you add new features to your wordpress website? The answer is plugins. Plugins are basically a set of php script files which allow you to add or change your current wordpress features.
+</p>
+<p>
+Also, by learning how to create plugins, you get to learn more about Wordpress and that in turn makes you a better Wordpress Developer.
+</p>
+<h4>Beginning Plugin Development</h4>
+
+<p>
+In order to create a plugin, you have to create a particular folder structure for your plugin. Every plugin has a a directory name and one or more php files inside it. The layout of a plugin structure looks like this.</p>
+<p>Inside your wordpress directory structure, you will find a directory called wp-content. Inside the wp-content will be a directory called plugins. 
+Your folder structure would look similiar to this
+</p>
+
+<br>
+
+<img class="img-boxed" src="pics/2.png">
+
+<br>
+
+
+
+<h4>Creating your plugin tutorial - Creating a Bulk Category Creator Plugin for Wordpress
+</h4>
+<p>
+The very first step in creating a plugin is to navigate to the wp-content directory of your local wordpress installation and inside the directory navigate to the plugins directory. Inside the plugins directory create a new directory called bulk-category-creator. 
+Once, you have created the directory, create a file named bulk-category-creator.php. Make sure, the directory name and the php file name are the same.
+</p>
+
+<p>
+Now, open your text editor (I prefer Sublime Text) and copy paste the following code into it
+</p>
+
+
+<xmp>
+<?php
+   /*
+   Plugin Name: Bulk Category Creator
+   Plugin URI: http://www.ruforaweb.com
+   Description: A plugin to bulk-create categories in one go
+   Version: 1.0
+   Author: Vishnu Ajit
+   Author URI: http://twitter.com/vishnuajith310
+   License: GPL2
+   */
+
+
+</xmp>
+<br>
+<p>
+Every plugin has a section of code describing its description, version, author name and licence. This is usually found in the header of the plugin’s main file. In our case, it is found in bulk-category-creator.php.</p>
+<p>
+This section is called the Meta-data of the plugin.Let us dissect the above content of code line by line.
+</p>
+<p>
+<strong>Plugin Name:</strong> Here is the name given to the plugin, in our case we call it the Bulk Category Creator<br>
+<strong>Plugin URI:</strong> This is a link to where the plugin can be found on the internet for download purposes. It can be found in the wordpress.org archives or in another location.<br>
+<strong>Description:</strong> This is the section where you can describe what actions the plugin performs.<br>
+<strong>Version:</strong> Specifies the version of the plugin<br>
+<strong>Author:</strong> Name of the author or developer who created this plugin<br>
+<strong>Author URI:</strong> Link to the author’s address on the internet<br>
+<strong>License:</strong> The license under which this plugin is released.<br>
+</p>
+Navigate to your Admin Dashboard>Plugins> Installed Plugins and you should see your plugin highlighted underneath.
+</p>
+
+
+<img class="img-boxed" src="pics/3.png">
+<br>
+
+<h4>Code layout for - Bulk Category Creator Plugin</h4>
+
+<p>Before jumping into coding our plugin, let us understand some basic Wordpress Hooks.
+Basically, in Wordpress there are two main types of hooks: Actions and Filters. Since, this is a basic plugin development tutorial, we shall not go into detail but basically this is how they differ.
+</p>
+<p><strong>Actions:</strong> Actions are used when you add something when an event has occured, Example : to tweet an article when a new post has been published.
+</p>
+<p><strong>Filters:</strong> Filters are used when you have to change some data or process it. 
+</p>
+<p>
+Now that you have understood the basics, let us start coding our plugin.
+</p>
+             
+
+<xmp>
+add_action('admin_menu', 'rfr_CategoryCreatorMenu');
+
+</xmp>
+
+
+<p>This line of code hooks the admin_menu to the function rfr_CategoryCreatorMenu
+</p>
+
+<p>
+The admin_menu function is used to add submenu or menu options to our Wordpress Admin Dashboard.
+Once that has been done, write down the next snippet of code.
+</p>
+
+
+<xmp>
+
+<?php
+   /*
+   Plugin Name: Bulk Category Creator
+   Plugin URI: http://www.ruforaweb.com
+   Description: A plugin to bulk-create categories in one go
+   Version: 1.0
+   Author: Vishnu Ajit
+   Author URI: http://twitter.com/vishnuajith310
+   License: GPL2
+   */
+
+
+add_action('admin_menu', 'rfr_CategoryCreatorMenu');
+
+function rfr_CategoryCreatorMenu()
+{
+
+    add_menu_page('Bulk Category Creator Plugin','Bulk Category Creator','administrator', __FILE__, 'rfr_CategorySettingsPage' , 'dashicons-admin-plugins');
+
+    add_action('admin_init', 'rfr_RegisterPluginSettings');
+
+}
+</xmp>
+
+
+<p>If you observe the above snippet carefully, you shall see that we have added a function <strong>rfr_CategoryCreatorMenu</strong> to our code. Let us dissect the lines of code one by one.
+</p>
+<p>
+We have used the name <strong>rfr_CategoryCreatorMenu </strong> in our code. You may notice the prefix <strong>rfr_</strong> that I have used. Always, when creating custom plugins for Wordpress, make sure your function has a unique name. Along with making the code cleaner, this resolves conflicts which may arise due to different plugins using the same name.So, always ensure that your functions are prefixed by a unique name. In this case I have used <strong>rfr_</strong> as my prefix, you can use whatever you want. You can use the first three letters of your name or your company name. 
+</p>
+<p>
+Okay, now inside the <strong>rfr_CategoryCreatorMenu</strong> function we have added a add_menu_page function. 
+</p>
+
+<p>
+The add_menu_page function adds a top level menu page. This function has a number of parameters passed into it.
+</p>
+<p>
+
+<strong>First parameter:</strong> This is the content of the title of the plugin page.<br>
+<strong>Second Parameter:</strong> This is the name of the Plugin as it appears in the Admin Dashboard. In our case, it shows Bulk Category Creator<br>
+<strong>Third parameter:</strong> This is the permission restriction for the plugin. In our case only administrators can access or use our plugin.<br>
+<strong>Fourth parameter:</strong> This is the slug used to refer to this menu<br>
+<strong>Fifth parameter:</strong> This is the function which should be invoked in order to display the contents of the page.<br>
+<strong>Sixth parameter:</strong> This is the URL to the icon to be displayed besides our menu in the Admin Dashboard. In our case we have added <strong>‘dashicons-admin-plugin’</strong> which is part of an icon-set that comes along with Wordpress. Refer <a href="https://developer.wordpress.org/resource/dashicons">https://developer.wordpress.org/resource/dashicons</a> for more icons that come along with the default Wordpress bundle.<br>
+
+</p>
+<p>
+Now, if you observe your Admin Dashboard, you can see that a new Menu called the <strong>Bulk Category Creator</strong> has been created.
+</p>
+<img class="img-boxed" src="pics/4.png">
+<br>
+
+<p>
+Next, We have to add another hook to our admin_init action. 
+</p>
+<p>
+<xmp>
+add_action(‘admin_init’, ‘rfr_RegisterPluginSettings’);
+</xmp>
+<p>
+We shall come back to it in a moment.</p>
+<p>
+Now the next part is to design the front-end of the admin dashboard. You might have noticed that, in the add_menu_page function we have pointed to  a function <strong>rfr_CategorySettingsPage </strong>.
+</p>
+<p>Let us define this function</p>
+
+<xmp>
+
+
+
+
+function rfr_CategorySettingsPage() {
+?>
+<div class="wrap">
+<h1>Bulk Category Creater</h1>
+
+<form method="post" action="options.php">
+    <?php settings_fields( 'rfr-bulk-category-creator-group' ); ?>
+    <?php do_settings_sections( 'rfr-bulk-category-creator-group' ); ?>
+    <table class="form-table">
+        
+        <tr valign="top">
+        <th scope="row">Enter categories separated by commas</th>
+        <td>
+        <textarea cols="50" rows="8" name="options_textarea"></textarea>
+        </td>
+        </tr>
+    </table>
+    
+    <?php submit_button('Bulk Create Categories'); ?>
+
+</form>
+</div>
+<?php } ?>
+
+
+
+</xmp>
+
+<p>This is where we define the front end for the plugin’s admin page.</p>
+
+<p>
+Basically, it consists of a form with a textarea. It is in this textarea that we are going to copy paste our categories in a comma separated list.
+</p>
+<p>
+This section is just basic HTML where a form is defined and inside a table layout a textarea has been specified. </p>
+<p>
+Just ensure, you do not forget to write the settings_fields and do_settings_sections just below the form declaration.
+</p>
+<p>Now, if you try navigating to our newly created menu <strong>“Bulk Category Creator”</strong> you can see the following 
+</p>
+
+<img  class="img-boxed" src="pics/5.png">
+
+<p>
+Tada! We have successfully created the front-end of our plugin. We have added an html form element to our plugin’s dashboard.
+</p>
+<p>
+Now, the only thing left to do is to code the necessary programming which allows us to import bulk categories on a single attempt. 
+</p>
+
+
+
+<xmp>
+
+function rfr_RegisterPluginSettings() {
+    //register our settings
+    
+    register_setting( 'rfr-bulk-category-creator-group', 'options_textarea' );
+
+    rfr_CreateCategories();
+
+}
+
+function rfr_CreateCategories()
+{
+        
+
+        $returnedStr = esc_attr($_POST['options_textarea'] );
+
+        
+        $trimmed = trim($returnedStr);
+        
+        $categories_array = explode(',',$trimmed);
+
+        
+    
+
+    foreach ($categories_array as $key => $value)
+    {
+
+        
+        $catString = $value.'';
+
+        $term = term_exists($value,'category');
+        if($term==0 || $term==null)
+        {
+            create_category($value);
+            
+        }
+        
+    }
+
+}
+
+function create_category($value)
+{
+    $trimmedValue = trim($value);
+    $hyphenatedValue = str_replace(" ", "-", $trimmedValue);
+
+    wp_insert_term(
+        $trimmedValue,
+        'category',
+        array(
+            'description' => $trimmedValue,
+            'slug'=> $hyphenatedValue
+            )
+        );
+
+    
+
+
+}
+
+
+</xmp>
+
+<p>
+The above content is basic php.
+Let us look into it in detail:
+</p>
+
+
+<xmp>
+
+
+        $returnedStr = esc_attr($_POST['options_textarea'] );
+
+        
+        $trimmed = trim($returnedStr);
+        
+        $categories_array = explode(',',$trimmed);
+
+</xmp>
+<p>
+
+<strong>$returnedStr</strong> recieves the value submitted from the textarea inside the form element.
+<br>
+<strong>$trimmed</strong> trims off the empty spaces on the left and right sides of the string.
+<br>
+The php <strong>explode</strong> function is used to convert the comma separated values into  <strong>$categories_array</strong> variable.
+<br>
+Next, we use a foreach loop to browse the contents of the <strong> $categories_array</strong> variable.
+<br>
+
+<xmp>
+    foreach ($categories_array as $key => $value)
+    {
+
+        
+        $catString = $value.'';
+
+        $term = term_exists($value,'category');
+        if($term==0 || $term==null)
+        {
+            create_category($value);
+            
+        }
+        
+    }
+
+</xmp>
+
+<p>
+Here, we loop inside each variable that is present inside the <strong>$categories_array</strong> 
+
+<strong>$catString</strong> gets the value of $value. The suffix <strong>.’ ‘</strong> is added to make sure the value is a string.<br>
+In the next line
+<strong>
+$term = term_exists($value, ‘category’);
+</strong><br>
+<p>
+We have used a wordpress hook <strong>term_exists</strong> to make sure that existing category names are not re-added to the category list. So, for instance if a category called ‘tall’ is already present, even if we try adding ‘tall’ into the bulk category creator textarea, it wont be re-added to the list of categories.
+</p><p>
+In the next line, we have used conditional checking to make sure already existing categories are not re-added to our list of categories
+</p>
+<p>The line <strong>if($term ==0 || $term == null)</strong> ensures that.
+</p>
+<p>
+Next, we pass the value to our <strong> create_category</strong> function
+</p>
+
+<xmp>
+function create_category($value)
+{
+    $trimmedValue = trim($value);
+    $hyphenatedValue = str_replace(" ", "-", $trimmedValue);
+
+    wp_insert_term(
+        $trimmedValue,
+        'category',
+        array(
+            'description' => $trimmedValue,
+            'slug'=> $hyphenatedValue
+            )
+        );
+
+    
+
+
+}
+
+</xmp>
+
+<p>
+Inside this function we do the following
+</p><p>
+<strong>
+$trimmedValue = trim($value);
+</strong>
+</p>
+<p>
+We pass the <strong>$value</strong> to our php <strong>trim</strong> function to trim whitespaces off our value.
+We also create a hyphenated value for use in our slug by writing
+<strong>
+$hyphenatedValue = str_replace(" ", "-", $trimmedValue);
+</strong>
+</p>
+<p>
+Here, we use the php function <strong>str_replace</strong> to replace the spaces in between our word to hypens. For example if the category we added is <strong>Must Watch</strong> we get the <strong>$hyphenatedValue</strong> as <strong>Must-Watch</strong>.
+</p>
+<p>
+Next, we use another Wordpress hook the <strong>wp_insert_term</strong>  to add our trimmed value, the taxonomy, and an array consisting of the description and our hyphenated slug.
+</p>
+<p>
+The function<strong> wp_insert_term</strong> function has 3 parameters.
+</p>
+<p>
+
+<strong>First parameter : </strong> the value to be inserted<br>
+<strong>Second parameter: </strong> The taxonomy required. In our case <strong>‘category’</strong> <br>
+<strong>Third parameter:</strong> An array consisting of the description and our slug<br>
+
+</p>
+<p>
+
+The Complete code is listed below
+</p>
+
+
+<xmp>
+<?php
+   /*
+   Plugin Name: Bulk Category Creator
+   Plugin URI: http://www.ruforaweb.com
+   Description: A plugin to bulk-create categories in one go
+   Version: 1.0
+   Author: Vishnu Ajit
+   Author URI: http://twitter.com/vishnuajith310
+   License: GPL2
+   */
+
+
+add_action('admin_menu', 'rfr_CategoryCreatorMenu');
+
+function rfr_CategoryCreatorMenu()
+{
+
+    add_menu_page('Bulk Category Creator Plugin','Bulk Category Creator','administrator', __FILE__, 'rfr_CategorySettingsPage' , 'dashicons-admin-plugins');
+
+    add_action('admin_init', 'rfr_RegisterPluginSettings');
+
+}
+
+
+function rfr_RegisterPluginSettings() {
+    //register our settings
+    
+    register_setting( 'rfr-bulk-category-creator-group', 'options_textarea' );
+
+    rfr_CreateCategories();
+
+}
+
+function rfr_CreateCategories()
+{
+        
+
+        $returnedStr = esc_attr($_POST['options_textarea'] );
+
+        
+        $trimmed = trim($returnedStr);
+        
+        $categories_array = explode(',',$trimmed);
+
+        
+    
+
+    foreach ($categories_array as $key => $value)
+    {
+
+        
+        $catString = $value.'';
+
+        $term = term_exists($value,'category');
+        if($term==0 || $term==null)
+        {
+            create_category($value);
+            
+        }
+        
+    }
+
+}
+
+function create_category($value)
+{
+    $trimmedValue = trim($value);
+    $hyphenatedValue = str_replace(" ", "-", $trimmedValue);
+
+    wp_insert_term(
+        $trimmedValue,
+        'category',
+        array(
+            'description' => $trimmedValue,
+            'slug'=> $hyphenatedValue
+            )
+        );
+
+    
+
+
+}
+
+
+
+function rfr_CategorySettingsPage() {
+?>
+<div class="wrap">
+<h1>Bulk Category Creater</h1>
+
+<form method="post" action="options.php">
+    <?php settings_fields( 'rfr-bulk-category-creator-group' ); ?>
+    <?php do_settings_sections( 'rfr-bulk-category-creator-group' ); ?>
+    <table class="form-table">
+        
+        <tr valign="top">
+        <th scope="row">Enter categories separated by commas</th>
+        <td>
+        <textarea cols="50" rows="8" name="options_textarea"></textarea>
+        </td>
+        </tr>
+    </table>
+    
+    <?php submit_button('Bulk Create Categories'); ?>
+
+</form>
+</div>
+<?php } ?>
+
+
+
+
+?>
+
+</xmp>
+
+<p>
+Now, navigate to Admin <strong>Dashboard>Bulk Categories Creator</strong> and enter a list of categories .
+</p>
+
+<p>
+In this example, I’m adding <strong>Tall</strong>, <strong>Medium</strong>, <strong>Short</strong>, <strong>Ultra short</strong> into the textarea
+</p>
+<img class="img-boxed" src="pics/6.png">
+<br>
+
+<p>Now, click on Bulk Create Categories
+</p>
+<p>
+Then, navigate to Admin <strong>Dashboard > Posts > Categories</strong> and you can see that our categories have been added to the list of Categories.
+</p>
+
+<img class="img-boxed" src="pics/7.png">
+<br>
+<p>
+<strong>Success</strong>, Our list of categories have now been created in one go. Note that under the slug section our category <strong>‘ultra short’</strong> has been hyphenated into ultra-short.
+</p><p>
+So, by far in our tutorial, you have successfully created your first Wordpress Plugin, the <strong>Bulk Category Creator Plugin</strong>. If you have followed through this tutorial, you would now have a working Wordpress plugin in your hand.</p>
+<p>
+If you want to distribute this plugin to your friends, just compress the plugin directory to a <strong>.zip</strong> file and you are done. </p>
+<p>
+Thank you, for following this tutorial, I’ll be back with more Wordpress Plugin development tutorials. Till then, bubye :)
+
+</p>
+
+
+
+                
+                </div>
+                <hr>
+                
+                <hr>
+                <!-- Pager -->
+                
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+                    <p class="copyright text-muted">Copyright &copy; Vishnu Ajit 2017</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
